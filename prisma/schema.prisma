@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  id String @id @default(uuid())
+  name String
+  cpf String @unique
+  email String @unique
+  password String
+  isAdmin Boolean @default(false)
+
+  product Product[]
+  bag Bag[]
+
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+}
+
+model Product {
+  id String @id @default(uuid())
+
+  user User? @relation(fields: [userID],references: [id])
+  userID String @map("user_id")
+
+  title String
+  description String
+  imgURL String
+  new Boolean
+  price Int
+
+  category Category @relation(fields: [categoryID],references: [id])
+  categoryID String @map("category_id")
+
+  bag Bag? @relation(fields: [bagID],references: [id])
+  bagID String? @map("bag_id")
+
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+}
+
+model Category{
+  product Product[]
+  id String @id @default(uuid())
+  title String @unique
+
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+}
+
+
+model Bag{
+  id String @id @default(uuid())
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
+
+  product Product[]
+
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+}

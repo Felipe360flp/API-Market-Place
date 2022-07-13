@@ -1,4 +1,10 @@
 ### Todo
+
+ - [x] Criar entidade transações (Create,findAll, FindOne, Delete Bag )
+ - [x] alterar controller e service da Bag (Create e update)
+ - [x] Na entidade product, será necessário alterar o price para aceitar números flutuantes
+ - [x] No service do product, função findAll, incluir o nome do usuário 
+
 ### In Progress
 ### Done ✓
 
@@ -14,4 +20,5 @@
 - [x] criar a rota que faz a busca apenas de produtos disponíveis.
 - [x] Incluir a função isAdmin nos campos devidos
 - [x] Readme
-- [x] Testar API 
+- [x] Testar API
+- [x] Compodoc
